@@ -1,5 +1,5 @@
 var compPaddle,playerPaddle, Ball;
-
+var bottomEdge,topEdge;
 
 function setup() {
   createCanvas(400,400);
@@ -12,20 +12,27 @@ function setup() {
   Ball.velocityX = 3;
   Ball.velocityY = 3;
 
+  bottomEdge=createSprite(200,400,400,10);
+  topEdge=createSprite(200,0,400,10);
 
-
-}
+  }
 
 function draw() {
   background(0); 
-   
-  playerPaddle.y = World.mouseY;
+  createEdgeSprites();
   
+  playerPaddle.y = World.mouseY;
+  compPaddle.y = Ball.y;
 
   //fill("white");
   //for(var y=0; y>400; y=y+20){
     //line(this.position.x, this.position.y, this.position.x, this.position.y+10);
     //}
+
+  Ball.bounceOff(bottomEdge);
+  Ball.bounceOff(topEdge);
+  Ball.bounceOff(playerPaddle);
+  Ball.bounceOff(compPaddle);
 
   drawSprites();
 }
